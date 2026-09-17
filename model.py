@@ -14,10 +14,11 @@ def impurity(labels):
 
     if len(labels)==0:
         return 0.0
-    unique_classes=np.unique(labels,return_counts=True)
-    if len(unique_classes)==1:
+    classes,counts=np.unique(labels,return_counts=True)
+    if len(classes)==1:
         return 0.0
-    prop=unique_classes[1]/len(labels)
+    prop=counts/len(labels)
+    prop=prop[prop>0]
     entropy=-np.sum(prop*np.log(prop))
     return float(entropy)
 
